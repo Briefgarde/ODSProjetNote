@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors Page</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        img {
+            display: block;
+            margin: auto;
+            width: 50%; /* Ajustez la largeur selon vos besoins */
+        }
+    </style>
+</head>
+<body>
+    <h1>Scientific articles on the engineering of the tissue</h1>
+    <img src="https://textilevaluechain.in/wp-content/uploads/2020/11/Tissue-eng-1920x1357.jpg" alt="Header Image" style="width:30%">
+    <table>
+        <thead>
+            <tr>
+                <th>Article</th>
+                <th>Author's name</th>
+                <th>Document</th>
+            </tr>
+        </thead>
+        <tbody id="author-list"></tbody>
+    </table>
+
+<!-- Extrait du code HTML -->
+<script>
+    // Script JavaScript pour récupérer les auteurs depuis l'API
+    // Script JavaScript pour récupérer les auteurs depuis l'API
+// Script JavaScript pour récupérer les auteurs depuis l'API
+fetch('/api/authors')
+    .then(response => response.json())
+    .then(articles => {
+        const authorList = document.getElementById('author-list');
+
+        // Parcourir les articles avec leurs auteurs
+        articles.forEach((article, index) => {
+            const row = authorList.insertRow();
+            const cell1 = row.insertCell(0);
+            const cell2 = row.insertCell(1);
+            const cell3 = row.insertCell(2);
+
+            cell1.textContent = article.article;  // Champ Article
+            cell2.textContent = article.authors.join(', ');  // Champ Auteur
+
+            // Ajouter les liens à cell3 s'ils existent
+            if (article.urlToArticle && article.urlToArticle.length > 0) {
+                cell3.innerHTML += `<a href="${article.urlToArticle}" target="_blank">Link</a> `;
+            } else {
+                cell3.innerHTML = "Pas de liens disponibles";
+            }
+        });
+
+    })
+    .catch(error => console.error('Error fetching articles:', error));
+
+
+</script>
+<!-- Extrait du code JavaScript -->
+
+<script src="style.js"></script>
+
+
+</body>
+</html>
+
